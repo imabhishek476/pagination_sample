@@ -2,22 +2,21 @@
 import React, { useEffect, useState } from "react";
 import Pagination from "./Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { paginate } from "../app/feature/articleSlice";
+import { setData, removeArticle, paginate } from "../app/feature/articleSlice";
 
 function Article() {
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const { data, currentPage, itemsPerPage } = useSelector(
+    (state) => state.article
+  );
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
-  const [update, setUpdate] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const fetchArticle = async () => {
     setLoading(true);
     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
     const result = await response.json();
-    console.log(result);
-    setData(result);
+    dispatch(setData(result));
     setTimeout(() => {
       setLoading(false);
     }, 4000);
@@ -33,13 +32,13 @@ function Article() {
 
   console.log(indexOfLastItem, indexOfFirstItem, currentItems);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+//   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const removeArticle = (id) => {
-    const newDate = data.filter((i) => i.id !== id);
-    setData(newDate);
-    setUpdate((prev) => !prev);
-  };
+//   const removeArticle = (id) => {
+//     const newDate = data.filter((i) => i.id !== id);
+//     setData(newDate);
+//     setUpdate((prev) => !prev);
+//   };
 
   return (
     <>
@@ -57,7 +56,8 @@ function Article() {
                 >
                   <span
                     className="absolute top-1 right-1 cursor-pointer"
-                    onClick={() => removeArticle(item.id)}
+                    // onClick={() => removeArticle(item.id)}
+                    onClick={() => dispatch(removeArticle(item.id))}
                   >
                     ❌
                   </span>
@@ -94,7 +94,7 @@ function Article() {
           <Pagination
             itemsPerPage={itemsPerPage}
             totalItems={data.length}
-            paginate={paginate}
+            paginate={pageNumber => dispatch(paginate(pageNumber))}
             currentPage={currentPage}
           />
         </div>
