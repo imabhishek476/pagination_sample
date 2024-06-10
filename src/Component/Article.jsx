@@ -1,6 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Pagination from "./Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { paginate } from "../app/feature/articleSlice";
+
 
 function Article() {
   const [data, setData] = useState([]);

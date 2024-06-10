@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import articleSlice from "./feature/articleSlice";
 
 const store = configureStore({
-    reducer:{}
+    reducer:{
+        articles : articleSlice
+    }
 })
 
 export default store;
