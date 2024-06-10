@@ -28,7 +28,7 @@ function Pagination({ itemsPerPage, totalItems, paginate, currentPage }) {
       <ul className="flex gap-2">
         {currentPage > 1 && (
           <li
-            className="bg-gray-400 text-white w-[40px] p-2 pl-4 rounded-full cursor-pointer"
+            className="bg-gray-400 text-white w-[40px] p-2 pl-2 rounded-full cursor-pointer"
             onClick={handlePrevious}
           >
             {" "}
@@ -52,7 +52,7 @@ function Pagination({ itemsPerPage, totalItems, paginate, currentPage }) {
         {
             currentPage < totalPages &&
           <li
-            className="bg-gray-400 text-white w-[40px] p-2 pl-4 rounded-full cursor-pointer"
+            className="bg-gray-400 text-white w-[40px] p-2 pl-2 rounded-full cursor-pointer"
             onClick={handleNext}
           >
             {" "}

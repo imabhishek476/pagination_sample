@@ -9,21 +9,25 @@ import { createSlice } from "@reduxjs/toolkit";
 //     }
 // )
 
-const intialState = {
-    // data: [],
-    currentPage: 1,
-    itemsPerPage: 6,
-}
+
 
 const articleSlice = createSlice({
     name: "articles",
-    intialState,
+    intialState:{
+        data:[],
+        currentPage: 1,
+        itemsPerPage: 6,
+
+    },
     reducers:{
         // removeArticle: (state,action)=>{
         //     state.data = state.data.filter(article =>article.id !== action.payload)
         // },
         paginate: (state, action)=>{
-            state.currentPage = action.payload;
+            if(action.payload){
+                state.currentPage = action.payload;
+            }
+            return null
         },
     },
     // extraReducers: builder =>{
